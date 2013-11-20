@@ -23,7 +23,5 @@
 | TYPE   | :integer        | :integer      | :decimal | :string | :datetime |
 
 ## Controllers
---------
 
 ## Views
---------
