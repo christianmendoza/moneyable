@@ -1,7 +1,6 @@
 # Rails Web Application: Moneyable
 
 ## Models
---------
 
 ####Account
 | COLUMN | type     | name    | number  | balance  |
