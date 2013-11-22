@@ -42,7 +42,7 @@
 ##RESTful
 
 | ACTION | HTTP METHOD | DEFAULT URL |	DESCRIPTION |
-|-|-|-|-|
+|--------|-------------|-------------|-------------|
 | Index | GET | [controller] | Gets a collection of resources |
 | Show | GET | [controller]/[id] | Gets a single resource identified by id |
 | Edit | GET | [controller]/[id] | Gets a form to edit resources identified by id |
