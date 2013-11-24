@@ -75,3 +75,5 @@
 * [carrierwave](http://rubygems.org/gems/carrierwave) (file attachment)
 * [money](http://rubygems.org/gems/money) (money library)
 * [googlecharts](http://rubygems.org/gems/googlecharts) (sexy charts)
+* [kaminari](https://github.com/amatsuda/kaminariß) (pagination)
+* [faker](http://rubygems.org/gems/faker) (create fake data, testing)
