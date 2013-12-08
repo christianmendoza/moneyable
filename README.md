@@ -116,7 +116,7 @@ A transfers is two transactions - XFER OUT is a transaction withdrawal from one 
 * [googlecharts](http://rubygems.org/gems/googlecharts) (sexy charts*)
 * [best in place](https://github.com/bernat/best_in_place) (in-place editing*)
 * [faker](http://rubygems.org/gems/faker) (create fake data, testing*)
-* *\*nice-to-have*
+* \* denotes a nice-to-have feature
 
 ##User Interface
 * [twitter bootstrap](http://getbootstrap.com/) (front-end framework)
