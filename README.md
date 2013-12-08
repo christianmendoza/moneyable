@@ -1,30 +1,63 @@
- # Rails Web Application: Moneyable
+# Rails Web Application: Moneyable
 
 ## Models
 
+####User
+**Associations:** `has_many :accounts`, `dependent: :destroy`
+
+A user can have multiple accounts. Accounts have many transactions. Accounts can be 'checking', 'savings' and 'credit card'. A new account can be set with a starting balance.
+
+| COLUMN | first_name | last_name | number  | balance  |
+|--------|:----------:|:---------:|:-------:|:--------:|
+| TYPE   | :string    | :string   | :string | :decimal |
+
 ####Account
+**Associations:** `belongs_to :user`, `has_many :transactions`, `dependent: :destroy`
+
+A user can have multiple accounts. Accounts have many transactions. Accounts can be 'checking', 'savings' and 'credit card'. A new account can be set with a starting balance.
+
 | COLUMN | type     | name    | number  | balance  |
 |--------|:--------:|:-------:|:-------:|:--------:|
 | TYPE   | :integer | :string | :string | :decimal |
 
 ####Transaction
-| COLUMN | date     | num     | description | notes   | category_id | withdrawal | deposit  |
-|--------|:--------:|:-------:|:-----------:|:-------:|:-----------:|:----------:|:--------:|
-| TYPE   | :dateime | :string | :string     | :string | :integer    | :decimal   | :decimal |
+**Associations:** `belongs_to :account`, `belongs_to: category`
+
+Transactions belong to an account and to a specific category
+
+| COLUMN | date     | type     | description | amount   | cleared  | account_id | category_id | notes   |
+|--------|:--------:|:--------:|:-----------:|:--------:|:--------:|:----------:|:-----------:|:-------:|
+| TYPE   | :date    | :integer | :string     | :decimal | :boolean | :integer   | :integer    | :string |
+| NOTES  |          |          |             |          |          | foreign key| foreign key |         |
 
 ####Category
+**Associations:** `has_many :transactions`
+
+Categories have many transactions.
+
 | COLUMN | name    |
 |--------|:-------:|
 | TYPE   | :string |
 
 ####Transfer
+A transfers is two transactions - XFER OUT is a transaction withdrawal from one account, XFER IN is a transaction deposit to another account.
+
 | COLUMN | from_account_id | to_account_id | amount   | notes   | date      |
 |--------|:---------------:|:-------------:|:--------:|:-------:|:---------:|
-| TYPE   | :integer        | :integer      | :decimal | :string | :datetime |
+| TYPE   | :integer        | :integer      | :decimal | :string | :date     |
 
 ## Controllers
+* accounts
+* categories
+* transactions
+* transfers
 
 ## Views
+* accounts: index, new, edit
+* categories: index, new, edit
+* transactions: index, new, edit
+* transfers: _form, index, new, edit, show
+* layouts: _navigation, accounts, categories, transactions, transfers
 
 ##Pages
 * Homepage
@@ -69,11 +102,23 @@
 | UPDATE | edit, update |
 | DELETE | destroy |
 
+#####Custom RESTful Actions
+| HTTP VERB | ROUTE | ACTION  | EXAMPLE |
+|-----------|:-----:|:-------:|:-------:|
+| POST      | /transaction/move/:transaction_id/:from_account_id/:to_account_id | move | /transaction/move/25/1/3 |
+
 ##Gems
 * [devise](http://rubygems.org/gems/devise) (authentication)
-* [paperclip](http://rubygems.org/gems/paperclip) (upload management)
-* [carrierwave](http://rubygems.org/gems/carrierwave) (file attachment)
 * [money](http://rubygems.org/gems/money) (money library)
-* [googlecharts](http://rubygems.org/gems/googlecharts) (sexy charts)
 * [kaminari](https://github.com/amatsuda/kaminariß) (pagination)
-* [faker](http://rubygems.org/gems/faker) (create fake data, testing)
+* [paperclip](http://rubygems.org/gems/paperclip) (upload management*)
+* [carrierwave](http://rubygems.org/gems/carrierwave) (file attachment*)
+* [googlecharts](http://rubygems.org/gems/googlecharts) (sexy charts*)
+* [best in place](https://github.com/bernat/best_in_place) (in-place editing*)
+* [faker](http://rubygems.org/gems/faker) (create fake data, testing*)
+* *\*nice-to-have*
+
+##User Interface
+* [twitter bootstrap](http://getbootstrap.com/) (front-end framework)
+* [font awesome](http://fontawesome.io/) (icons)
+* [toni spinozzi](http://tonispinozzi.com/) (logo)
