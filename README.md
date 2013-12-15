@@ -6,41 +6,42 @@ Moneyable is an web application designed to help manage your finances and keep o
 ####User
 **Associations:** `has_many :accounts`, `dependent: :destroy`
 
-A user can have multiple accounts. Accounts have many transactions. Accounts can be 'checking', 'savings' and 'credit card'. A new account can be set with a starting balance.
+A user has many accounts. Deleting a user will delete all of his accounts and transactions.
 
-| COLUMN | first_name | last_name | number  | balance  |
-|--------|:----------:|:---------:|:-------:|:--------:|
-| TYPE   | :string    | :string   | :string | :decimal |
+| COLUMN | first_name | last_name |
+|--------|:----------:|:---------:|
+| TYPE   | :string    | :string   |
 
 ####Account
 **Associations:** `belongs_to :user`, `has_many :transactions`, `dependent: :destroy`
 
-A user can have multiple accounts. Accounts have many transactions. Accounts can be 'checking', 'savings' and 'credit card'. A new account can be set with a starting balance.
+An account has many transactions. An account can be of type 'checking', 'savings' or 'credit card'. A new account can be set with a starting balance. Deleting an account will delete all its transactions.
 
-| COLUMN | type     | name    | number  | balance  |
-|--------|:--------:|:-------:|:-------:|:--------:|
-| TYPE   | :integer | :string | :string | :decimal |
+| COLUMN | account_type | account_name | account_number | account_balance | user_id     |
+|--------|:------------:|:------------:|:--------------:|:---------------:|:-----------:|
+| TYPE   | :integer     | :string      | :string        | :decimal        | :integer    |
+| NOTES  |              |              |                |                 | foreign_key |
 
 ####Transaction
 **Associations:** `belongs_to :account`, `belongs_to: category`
 
-Transactions belong to an account and to a specific category
+Transactions belong to an account and to a specific category.
 
 | COLUMN | date     | type     | description | amount   | cleared  | account_id | category_id | notes   |
 |--------|:--------:|:--------:|:-----------:|:--------:|:--------:|:----------:|:-----------:|:-------:|
 | TYPE   | :date    | :integer | :string     | :decimal | :boolean | :integer   | :integer    | :string |
-| NOTES  |          |          |             |          |          | foreign key| foreign key |         |
+| NOTES  |          |          |             |          |          | foreign_key| foreign_key |         |
 
 ####Category
 **Associations:** `has_many :transactions`, `has_many :subcategories`, 
 `belongs_to :parent_category`
 
-Categories can have subcategories. A subcategory belongs to its parent category. Categories can have many transactions.
+A category can have one of more subcategories. A subcategory belongs to its parent category. A category can have many transactions. Deleting a category will update the transactions accordingly.
 
 | COLUMN | name    | parent_id   |
 |--------|:-------:|:-----------:|
 | TYPE   | :string | integer     |
-| NOTES  |         | foreign key |
+| NOTES  |         | foreign_key |
 
 ####Transfer
 A transfers is two transactions - XFER OUT is a transaction withdrawal from one account, XFER IN is a transaction deposit to another account.
