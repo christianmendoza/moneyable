@@ -1,4 +1,5 @@
 # Rails Web Application: Moneyable
+Moneyable is an web application designed to help manage your finances and keep on top of where your money is going.
 
 ## Models
 
@@ -31,13 +32,15 @@ Transactions belong to an account and to a specific category
 | NOTES  |          |          |             |          |          | foreign key| foreign key |         |
 
 ####Category
-**Associations:** `has_many :transactions`
+**Associations:** `has_many :transactions`, `has_many :subcategories`, 
+`belongs_to :parent_category`
 
-Categories have many transactions.
+Categories can have subcategories. A subcategory belongs to its parent category. Categories can have many transactions.
 
-| COLUMN | name    |
-|--------|:-------:|
-| TYPE   | :string |
+| COLUMN | name    | parent_id   |
+|--------|:-------:|:-----------:|
+| TYPE   | :string | integer     |
+| NOTES  |         | foreign key |
 
 ####Transfer
 A transfers is two transactions - XFER OUT is a transaction withdrawal from one account, XFER IN is a transaction deposit to another account.
@@ -74,7 +77,7 @@ A transfers is two transactions - XFER OUT is a transaction withdrawal from one 
 
 ##RESTful
 
-| ACTION | HTTP METHOD | DEFAULT URL |	DESCRIPTION |
+| ACTION | HTTP METHOD | DEFAULT URL |  DESCRIPTION |
 |--------|-------------|-------------|-------------|
 | Index | GET | [controller] | Gets a collection of resources |
 | Show | GET | [controller]/[id] | Gets a single resource identified by id |
