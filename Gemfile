@@ -35,6 +35,7 @@ end
 gem 'devise', '~> 3.2.2'
 gem "kaminari", '~> 0.15.0'
 gem "googlecharts", "~> 1.6.8"
+gem "money", "~> 6.0.0"
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
