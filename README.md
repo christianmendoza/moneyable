@@ -27,10 +27,10 @@ An account has many transactions. An account can be of type 'checking', 'savings
 
 Transactions belong to an account and to a specific category.
 
-| COLUMN | date     | type     | description | amount   | cleared  | account_id | category_id | notes   |
-|--------|:--------:|:--------:|:-----------:|:--------:|:--------:|:----------:|:-----------:|:-------:|
-| TYPE   | :date    | :integer | :string     | :decimal | :boolean | :integer   | :integer    | :string |
-| NOTES  |          |          |             |          |          | foreign_key| foreign_key |         |
+| COLUMN | date_of  | transaction_type | description | amount   | transaction_cleared | notes   | account_id  | category_id |
+|--------|:--------:|:----------------:|:-----------:|:--------:|:-------------------:|:-------:|:-----------:|:-----------:|
+| TYPE   | :date    | :integer         | :string     | :decimal | :boolean            | :string | :integer    | :integer    |
+| NOTES  |          |                  |             |          |                     |         | foreign_key | foreign_key |
 
 ####Category
 **Associations:** `has_many :transactions`, `has_many :subcategories`, 
@@ -38,10 +38,10 @@ Transactions belong to an account and to a specific category.
 
 A category can have one of more subcategories. A subcategory belongs to its parent category. A category can have many transactions. Deleting a category will update the transactions accordingly.
 
-| COLUMN | name    | parent_id   |
-|--------|:-------:|:-----------:|
-| TYPE   | :string | integer     |
-| NOTES  |         | foreign_key |
+| COLUMN | category_name | parent_id   |
+|--------|:-------------:|:-----------:|
+| TYPE   | :string       | integer     |
+| NOTES  |               | foreign_key |
 
 ####Transfer
 A transfers is two transactions - XFER OUT is a transaction withdrawal from one account, XFER IN is a transaction deposit to another account.

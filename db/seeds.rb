@@ -11,7 +11,7 @@
 
 # categories = "Auto & Transport|Bills & Utilities|Business Services|Education|Entertainment|Fees & Charges|Financial|Food & Dining|Gifts & Donations|Health & Fitness|Home|Income|Investments|Kids|Loans|Personal Care|Pets|Shopping|Taxes|Transfer|Travel|Uncategorized".split('|').sort
 
-# categories.each { |c| Category.create name: c } 
+# categories.each { |c| Category.create category_name: c } 
 
 # puts 'Done adding categories'
 
