@@ -4,10 +4,35 @@ source 'https://rubygems.org'
 gem 'rails', '4.0.1'
 
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+group :development do
+  gem 'sqlite3'
+  gem 'annotate', '~> 2.6.1'
+  gem 'quiet_assets', '~> 1.0.2'
+  gem 'debugger', '~> 1.6.3'
+  gem 'pry-rails', '~> 0.3.2'
+  gem 'better_errors', '~> 1.1.0'
+  gem 'binding_of_caller', '~> 0.7.2'
+  gem 'rails_layout', '~> 0.5.8'
+  gem 'guard-livereload', '~> 2.1.0', require: false
+  gem 'rack-livereload', '~> 0.3.15'
+end
+
+# group :production do
+#   gem 'pg'
+#   gem 'rails_12factor'
+# end
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
+
+# Custom
+gem 'foundation-rails', '~> 5.0.2.0'
+gem 'devise', '~> 3.2.2'
+gem 'kaminari', '~> 0.15.0'
+gem 'googlecharts', '~> 1.6.8'
+gem 'money', '~> 6.0.0'
+gem 'simple_form', '~> 3.0.1'
+gem 'carrierwave', '~> 0.9.0'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
@@ -31,11 +56,6 @@ group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
 end
-
-gem 'devise', '~> 3.2.2'
-gem "kaminari", '~> 0.15.0'
-gem "googlecharts", "~> 1.6.8"
-gem "money", "~> 6.0.0"
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
