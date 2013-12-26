@@ -1,0 +1,21 @@
+<nav class="top-bar" data-topbar>
+  <ul class="title-area">
+    <li class="name">
+      <h1><%= link_to "(Logo) Moneyable", root_path %></h1>
+    </li>
+    <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+  </ul>
+
+  <section class="top-bar-section">
+    <ul class="right">
+      <li class="divider"></li>
+      <li class="<%= is_active?(features_page_path) %>"><%= link_to "Features", features_page_path %></li>
+      <li class="divider"></li>
+      <li class="<%= is_active?(contact_page_path) %>"><%= link_to "Contact", contact_page_path %></li>
+      <li class="divider"></li>
+      <li class="<%= is_active?(new_user_session_path) %>"><%= link_to "Sign in", new_user_session_path %></li>
+      <li class="divider"></li>
+      <li class="has-form <%= is_active?(new_user_registration_path) %>"><%= link_to "Sign up", new_user_registration_path, class: "small button" %></li>
+    </ul>
+  </section>
+</nav>
