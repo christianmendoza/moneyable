@@ -201,7 +201,7 @@ DEPENDENCIES
   devise (~> 3.2.2)
   foundation-rails (~> 5.0.2.0)
   googlecharts (~> 1.6.8)
-  guard-livereload (~> 2.1.0)
+  guard-livereload
   jbuilder (~> 1.2)
   jquery-rails
   kaminari (~> 0.15.0)

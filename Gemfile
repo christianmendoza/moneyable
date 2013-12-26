@@ -13,7 +13,7 @@ group :development do
   gem 'better_errors', '~> 1.1.0'
   gem 'binding_of_caller', '~> 0.7.2'
   gem 'rails_layout', '~> 0.5.8'
-  gem 'guard-livereload', '~> 2.1.0', require: false
+  gem 'guard-livereload', require: false
   gem 'rack-livereload', '~> 0.3.15'
 end
 
