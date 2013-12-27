@@ -5,6 +5,7 @@ Moneyable::Application.routes.draw do
   devise_for :users
 
   root "pages#homepage"
+  #match "/users/:id" => "users#show", via: :get
 
   # Pages routes ...
   PagesController.action_methods.each do |action|

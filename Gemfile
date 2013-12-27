@@ -27,6 +27,7 @@ gem 'sass-rails', '~> 4.0.0'
 
 # Custom
 gem 'foundation-rails', '~> 5.0.2.0'
+gem 'foundation-datetimepicker-rails', '~> 0.1.2'
 gem 'devise', '~> 3.2.2'
 gem 'kaminari', '~> 0.15.0'
 gem 'googlecharts', '~> 1.6.8'

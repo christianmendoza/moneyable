@@ -4,10 +4,9 @@ Moneyable is an web application designed to help manage your finances and keep o
 ## Models
 
 ####User
-**Associations:** `has_many :accounts`, `dependent: :destroy`
+**Associations:** `has_many :accounts`, `dependent: :destroy`, `has_many :transactions, through: :accounts`
 
-A user has many accounts. Deleting a user will delete all of his accounts and transactions.
-
+A user has many accounts. Deleting a user will delete all of his accounts and transactions. A user has many transactions through accounts.
 | COLUMN | first_name | last_name |
 |--------|:----------:|:---------:|
 | TYPE   | :string    | :string   |
