@@ -1,0 +1,30 @@
+<h2>My Accounts</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Account</th>
+      <th>Account Number</th>
+      <th>Account Type</th>
+      <th>Current Balance</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @accounts.each do |account| %>
+      <tr>
+        <td><%= account.account_name %></td>
+        <td><%= "x" << account.account_number %></td>
+        <td><%= find_account_type(account.account_type) %></td>
+        <td class="text-right"><%= number_to_currency(account.account_balance) %></td>
+        <td><%= link_to 'Show', account_path(account) %></td>
+        <td><%= link_to "Edit", edit_account_path(account) %></td>
+        <td><%= link_to 'Delete', account_path(account), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<p><%= link_to "Create account", new_account_path %></p>

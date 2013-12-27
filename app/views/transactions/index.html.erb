@@ -1,0 +1,30 @@
+<h2>My Transactions</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Category</th>
+      <th>Amount</th>
+      <th>Status</th>
+      <th>Balance</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @transactions.each do |transaction| %>
+    <tr>
+      <td><%= transaction.date_of %></td>
+      <td><%= find_transaction_type(transaction.transaction_type) %></td>
+      <td><%= transaction.description %></td>
+      <td><%= get_category_name(transaction.category_id) %></td>
+      <td class="text-right"><%= number_to_currency(transaction.amount) %></td>
+      <td><%= find_transaction_status(transaction.transaction_cleared) %></td>
+      <td class="text-right"></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<p><%= link_to "Create transaction", new_transaction_path %></p>

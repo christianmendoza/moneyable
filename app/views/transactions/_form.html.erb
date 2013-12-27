@@ -1,0 +1,47 @@
+<!-- <Transaction id: nil, date_of: nil, transaction_type: nil, description: nil, amount: #<BigDecimal:7fa045d721b0,'0.0',9(18)>, transaction_cleared: nil, notes: nil, account_id: nil, category_id: nil, created_at: nil, updated_at: nil> -->
+
+<%= simple_form_for(@transaction, html: {class: 'form-horizontal' }) do |f| %>
+  <%= f.error_notification %>
+  
+  <% amount = "0.00" %>
+  <% if (params[:action] == "edit") %>
+    <% amount = number_with_precision(@transaction.amount, precision: 2) %>
+  <% end %>
+
+  <div class="form-inputs">
+    <!-- Need to pass in account id -->
+    <%= f.input :account_id,
+                as: :hidden,
+                input_html: { value: 7 } %>         
+
+    <%= f.input :description,
+                required: true,
+                autofocus: true %>
+
+    <%= f.input :transaction_type,
+                collection: get_transaction_types,
+                include_blank: false,
+                required: true %>
+
+    <%= f.input :amount,
+                as: :string,
+                input_html: { value: amount },
+                required: true %>
+
+    <%= f.input :date_of,
+                as: :date,
+                required: true %>
+
+    <%= f.association :category, label_method: :category_name, selected: '22' %>
+
+    <%= f.input :notes,
+                as: :text %>
+
+    <%= f.input :transaction_cleared %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+    <%= link_to "Cancel", :back %>
+  </div>
+<% end %>

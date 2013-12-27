@@ -1,0 +1,30 @@
+<h2>Account</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Account</th>
+      <th>Account Number</th>
+      <th>Account Type</th>
+      <th>Current Balance</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%= @account.account_name %></td>
+      <td><%= "x" << @account.account_number %></td>
+      <td><%= find_account_type(@account.account_type) %></td>
+      <td class="text-right"><%= number_to_currency(@account.account_balance) %></td>
+      <td><%= link_to 'Show', account_path(@account) %></td>
+      <td><%= link_to "Edit", edit_account_path(@account) %></td>
+      <td><%= link_to 'Delete', account_path(@account), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  </tbody>
+</table>
+
+<p><%= link_to "Create account", new_account_path %></p>
+
+<!-- "Account(id: integer, account_type: integer, account_name: string, account_number: string, account_balance: decimal, user_id: integer, created_at: datetime, updated_at: datetime)" -->
