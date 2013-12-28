@@ -15,6 +15,7 @@ group :development do
   gem 'rails_layout', '~> 0.5.8'
   gem 'guard-livereload', require: false
   gem 'rack-livereload', '~> 0.3.15'
+  gem 'faker', '~> 1.2.0'
 end
 
 # group :production do

@@ -3,7 +3,9 @@ class TransactionsController < ApplicationController
   before_action :find_transaction, only: [:edit, :show, :update, :destroy]
 
   def index
-    @transactions = current_user.transactions
+    @user = User.find(current_user)
+    @account = @user.accounts.find(params[:account_id])
+    @transactions = @account.transactions
   end
 
   def new
@@ -11,7 +13,8 @@ class TransactionsController < ApplicationController
   end
 
   def create
-    @transaction = Transaction.create safe_transaction
+    @transaction = Transaction.new(safe_transaction)
+    #@transaction.account_id = ?
 
     if @transaction.save
       flash[:notice] = "Transaction added."
@@ -32,6 +35,8 @@ class TransactionsController < ApplicationController
   private
 
   def find_transaction
+    # @user = User.find(current_user)
+    # @account = @user.accounts.find(params[:id])
     @transaction = Transaction.find params[:id]
   end
 

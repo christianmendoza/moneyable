@@ -11,8 +11,8 @@ class AccountsController < ApplicationController
   end
 
   def create
-    @account = Account.create safe_account
-
+    @account = Account.new(safe_account)
+    @account.user_id = current_user.id
     if @account.save
       find_account_type_name
       flash[:notice] = get_flash_message
@@ -50,7 +50,8 @@ class AccountsController < ApplicationController
   private
 
   def find_account
-    @account = Account.find params[:id]
+    @user = User.find(current_user)
+    @account = @user.accounts.find(params[:id])
   end
 
   def get_flash_message

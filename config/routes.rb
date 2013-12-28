@@ -1,13 +1,19 @@
 Moneyable::Application.routes.draw do
-  resources :transactions
+  devise_for :users, path_names: { sign_in: 'login', sign_out: 'logout', sign_up: 'signup' }
+
+  resources :users do
+    resources :accounts, shallow: true
+  end
+
+  resources :accounts do
+    resources :transactions, shallow: true
+  end
+
   resources :categories
-  resources :accounts
-  devise_for :users
 
   root "pages#homepage"
-  #match "/users/:id" => "users#show", via: :get
 
-  # Pages routes ...
+  # Pages routes...
   PagesController.action_methods.each do |action|
     get "/#{action}", to: "pages##{action}", as: "#{action}_page"
   end
