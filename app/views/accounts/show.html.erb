@@ -2,7 +2,7 @@
     <h2 class="right"><%= @account.account_name %> (<%= format_account_number(@account.account_number) %>)</h2>
     <h2 class="left">Balance: <%= number_to_currency(@account.account_balance) %></h2>
 </div>
-<i class="fi-css3"></i>
+
 <table>
   <thead>
     <tr>
@@ -20,11 +20,11 @@
     <tr>
       <td><%= transaction.date_of %></td>
       <td><%= find_transaction_type(transaction.transaction_type) %></td>
-      <td><%= transaction.description %></td>
+      <td><%= link_to transaction.description, edit_transaction_path(transaction) %></td>
       <td><%= get_category_name(transaction.category_id) %></td>
       <td class="text-right"><%= format_amount(transaction.transaction_type, number_to_currency(transaction.amount)) %></td>
       <td><%= get_transaction_status(transaction.transaction_cleared) %></td>
-      <td class="text-right"><%= number_to_currency(@account.account_balance) %></td>
+      <td class="text-right"><%= number_to_currency(get_total(transaction)) %></td>
     </tr>
     <% end %>
   </tbody>

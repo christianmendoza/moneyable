@@ -1,6 +1,6 @@
 class Account < ActiveRecord::Base
   #attr_accessible :account_type, :account_name, :account_number, :account_balance
-  has_many :transactions, dependent: :destroy, order: 'date_of DESC'
+  has_many :transactions, dependent: :destroy#, order: 'date_of ASC'
   belongs_to :user
 
   # account_name is required

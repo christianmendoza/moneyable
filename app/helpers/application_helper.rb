@@ -72,9 +72,9 @@ module ApplicationHelper
     when 2
       "Credit"
     when 3
-      "Transfer-in"
+      "Transfer - In"
     when 4
-      "Transfer-out"
+      "Transfer - Out"
     else
       ""
     end
@@ -82,9 +82,10 @@ module ApplicationHelper
 
   def get_transaction_status(cleared)
     if(cleared)
+      #tag('i', class: 'fi-check')
       "Cleared"
     else
-      "Uncleared"
+      "Not cleared"
     end
   end
 

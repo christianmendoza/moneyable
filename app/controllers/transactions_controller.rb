@@ -27,7 +27,7 @@ class TransactionsController < ApplicationController
 
   def show
     @user = User.find(current_user)
-    @account = @user.accounts.find(params[:account_id])
+    @account = @user.accounts.find(params[:id])
     @transactions = @account.transactions
   end
 

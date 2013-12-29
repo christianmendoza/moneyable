@@ -10,7 +10,7 @@
     <%= f.association :account,
                       label_method: :account_name,
                       collection: current_user.accounts.all(order: 'account_name'),
-                      selected: @account.id,
+                      selected: @transaction.account_id,
                       include_blank: false %>
 
     <%= f.input :description,

@@ -29,7 +29,7 @@ class AccountsController < ApplicationController
   def show
     @user = User.find(current_user)
     @account = @user.accounts.find(params[:id])
-    @transactions = @account.transactions
+    @transactions = @account.transactions.order(date_of: :asc)
   end
 
   def update
