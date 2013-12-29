@@ -7,6 +7,7 @@ Moneyable is an web application designed to help manage your finances and keep o
 **Associations:** `has_many :accounts`, `dependent: :destroy`, `has_many :transactions, through: :accounts`
 
 A user has many accounts. Deleting a user will delete all of his accounts and transactions. A user has many transactions through accounts.
+
 | COLUMN | first_name | last_name |
 |--------|:----------:|:---------:|
 | TYPE   | :string    | :string   |
@@ -54,26 +55,23 @@ A transfers is two transactions - XFER OUT is a transaction withdrawal from one 
 * categories
 * transactions
 * transfers
+* pages
 
 ## Views
-* accounts: index, new, edit
+* accounts: _form, index, new, edit, show
 * categories: index, new, edit
-* transactions: index, new, edit
+* transactions: _form, index, new, edit, show
 * transfers: _form, index, new, edit, show
-* layouts: _navigation, accounts, categories, transactions, transfers
+* layouts: _navigation, _flash, _footer, application
+* pages: homepage, about, features, contact
 
 ##Pages
 * Homepage
 * Log in page
+* Sign up page
 * About page
+* Features page
 * Contact page
-
-##Partials
-
-* Header
-* Footer
-* Transaction form
-* Transactions view
 
 ##RESTful
 
@@ -111,17 +109,20 @@ A transfers is two transactions - XFER OUT is a transaction withdrawal from one 
 | POST      | /transaction/move/:transaction_id/:from_account_id/:to_account_id | move | /transaction/move/25/1/3 |
 
 ##Gems
+
+* [foundation-rails](http://rubygems.org/gems/foundation-rails) (front-end)
 * [devise](http://rubygems.org/gems/devise) (authentication)
-* [money](http://rubygems.org/gems/money) (money library)
+* [simple_form](http://rubygems.org/gems/simple_form) (easy forms)
 * [kaminari](https://github.com/amatsuda/kaminariß) (pagination)
-* [paperclip](http://rubygems.org/gems/paperclip) (upload management*)
-* [carrierwave](http://rubygems.org/gems/carrierwave) (file attachment*)
-* [googlecharts](http://rubygems.org/gems/googlecharts) (sexy charts*)
-* [best in place](https://github.com/bernat/best_in_place) (in-place editing*)
-* [faker](http://rubygems.org/gems/faker) (create fake data, testing*)
+* [faker](http://rubygems.org/gems/faker) (create fake data, testing, seeding)
+* [money](http://rubygems.org/gems/money) (money library)*
+* [paperclip](http://rubygems.org/gems/paperclip) (upload management)*
+* [carrierwave](http://rubygems.org/gems/carrierwave) (file attachment)*
+* [googlecharts](http://rubygems.org/gems/googlecharts) (sexy charts)*
+* [best in place](https://github.com/bernat/best_in_place) (in-place editing)*
 * \* denotes a nice-to-have feature
 
 ##User Interface
-* [twitter bootstrap](http://getbootstrap.com/) (front-end framework)
+* [foundation](http://getbootstrap.com/s) (front-end framework)
 * [font awesome](http://fontawesome.io/) (icons)
 * [toni spinozzi](http://tonispinozzi.com/) (logo)
