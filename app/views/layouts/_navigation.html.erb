@@ -12,7 +12,7 @@
         <li class="divider"></li>
         <li class=""><a href="">Overview</a></li>
         <li class="divider"></li>
-        <li class="<%= is_active?(user_accounts_path) %>"><%= link_to "My Accounts", user_accounts_path %></li>
+        <li class="<%= is_active?(user_accounts_path(current_user)) %>"><%= link_to "My Accounts", user_accounts_path(current_user) %></li>
         <li class="divider"></li>
         <li class=""><a href="">Reports</a></li>
         <li class="divider"></li>
