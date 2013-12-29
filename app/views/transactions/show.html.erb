@@ -17,13 +17,13 @@
       <td><%= find_transaction_type(@transaction.transaction_type) %></td>
       <td><%= @transaction.description %></td>
       <td><%= get_category_name(@transaction.category_id) %></td>
-      <td class="text-right"><%= number_to_currency(@transaction.amount) %></td>
-      <td><%= find_transaction_status(@transaction.transaction_cleared) %></td>
+      <td class="text-right"><%= format_amount(@transaction.transaction_type, number_to_currency(@transaction.amount)) %></td>
+      <td><%= get_transaction_status(@transaction.transaction_cleared) %></td>
     </tr>
   </tbody>
 </table>
 
 <p><%= link_to "Edit transaction", edit_transaction_path %></p>
 <p><%= link_to "Delete transaction", transaction_path(@transaction), method: :delete, data: { confirm: 'Are you sure?' } %></p>
-<p><%= link_to "Create transaction", new_transaction_path %></p>
-<p><%= link_to "All transactions", transactions_path %></p>
+<p><%= link_to "Create transaction", new_account_transaction_path %></p>
+<p><%= link_to "All transactions", account_transactions_path %></p>

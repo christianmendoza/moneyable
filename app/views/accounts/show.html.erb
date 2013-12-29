@@ -14,7 +14,7 @@
   <tbody>
     <tr>
       <td><%= @account.account_name %></td>
-      <td><%= "x" << @account.account_number %></td>
+      <td><%= format_account_number(@account.account_number) %></td>
       <td><%= find_account_type(@account.account_type) %></td>
       <td class="text-right"><%= number_to_currency(@account.account_balance) %></td>
       <td><%= link_to "Edit", edit_account_path(@account) %></td>
