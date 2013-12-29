@@ -9,7 +9,7 @@ module ApplicationHelper
 
   def get_category_name(id)
     if id.nil?
-      cat_name = ""
+      cat_name = ''
     else
       category = Category.find(id)
       cat_name = category.category_name
@@ -20,7 +20,6 @@ module ApplicationHelper
   def get_account_name(id)
     account = Account.find(id)
     account.acount_name
-    
   end
   
   def get_current_account_balance(id)
@@ -81,11 +80,17 @@ module ApplicationHelper
     end
   end
 
-  def find_transaction_status(cleared)
+  def get_transaction_status(cleared)
     if(cleared)
       "Cleared"
     else
       "Uncleared"
+    end
+  end
+
+  def format_account_number(number)
+    if(!number.empty?)
+      "x" << number
     end
   end
 end
