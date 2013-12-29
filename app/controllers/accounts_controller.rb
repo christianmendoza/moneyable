@@ -27,7 +27,9 @@ class AccountsController < ApplicationController
   end
 
   def show
-    render
+    @user = User.find(current_user)
+    @account = @user.accounts.find(params[:id])
+    @transactions = @account.transactions
   end
 
   def update
