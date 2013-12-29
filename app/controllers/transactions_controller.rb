@@ -9,12 +9,13 @@ class TransactionsController < ApplicationController
   end
 
   def new
+    @user = User.find(current_user)
+    @account = @user.accounts.find(params[:account_id])
     @transaction = Transaction.new
   end
 
   def create
     @transaction = Transaction.new(safe_transaction)
-    #@transaction.account_id = ?
 
     if @transaction.save
       flash[:notice] = "Transaction added."
@@ -25,7 +26,8 @@ class TransactionsController < ApplicationController
   end
 
   def show
-    render
+    @user = User.find(current_user)
+    @account = @user.accounts.find(params[:account_id])
   end
 
   def edit
