@@ -1,16 +1,10 @@
-<%= simple_form_for([@account, @transaction], html: {class: 'form-horizontal' }) do |f| %>
   <%= f.error_notification %>
-  
-  <% amount = "0.00" %>
-  <% if (params[:action] == "edit") %>
-    <% amount = number_with_precision(@transaction.amount, precision: 2) %>
-  <% end %>
 
   <div class="form-inputs">
     <%= f.association :account,
                       label_method: :account_name,
                       collection: current_user.accounts.all(order: 'account_name'),
-                      selected: @transaction.account_id,
+                      selected: @account.id,
                       include_blank: false %>
 
     <%= f.input :description,
@@ -24,14 +18,22 @@
 
     <%= f.input :amount,
                 as: :string,
-                input_html: { value: amount },
+                input_html: { value: get_transaction_amount },
+                required: true %>
+
+    <%#= f.input :date_of,
+                start_year: Date.today.year - 1,
+                end_year: Date.today.year + 1,
+                order: [:month, :day, :year],
                 required: true %>
 
     <%= f.input :date_of,
-                as: :date,
-                required: true %>
+                as: :string,
+                input_html: { value: get_transaction_date } %>
 
-    <%= f.association :category, label_method: :category_name, selected: '22' %>
+    <%= f.association :category,
+                      label_method: :category_name,
+                      selected: get_category_id %>
 
     <%= f.input :notes,
                 as: :text %>
@@ -43,4 +45,3 @@
     <%= f.button :submit %>
     <%= link_to "Cancel", :back %>
   </div>
-<% end %>

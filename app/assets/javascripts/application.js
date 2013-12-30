@@ -18,3 +18,10 @@
 //= require_tree .
 
 $(function(){ $(document).foundation(); });
+
+// fadeout flash messages
+$('.alert-box').not('.warning').slideDown(function() {
+    setTimeout(function() {
+        $('.alert-box').slideUp(600);
+    }, '3000');
+});

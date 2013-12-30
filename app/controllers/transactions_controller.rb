@@ -1,16 +1,13 @@
 class TransactionsController < ApplicationController
   before_action :authenticate_user!
+  before_action :find_account, only: [:index, :new]
   before_action :find_transaction, only: [:edit, :show, :update, :destroy]
 
   def index
-    @user = User.find(current_user)
-    @account = @user.accounts.find(params[:account_id])
     @transactions = @account.transactions
   end
 
   def new
-    @user = User.find(current_user)
-    @account = @user.accounts.find(params[:account_id])
     @transaction = Transaction.new
   end
 
@@ -26,21 +23,37 @@ class TransactionsController < ApplicationController
   end
 
   def show
-    @user = User.find(current_user)
-    @account = @user.accounts.find(params[:id])
-    @transactions = @account.transactions
+    render
   end
 
   def edit
     render
   end
 
+  def update
+    if @transaction.update(safe_transaction)
+      flash[:notice] = "Transaction updated."
+      redirect_to account_path(@account)
+    else
+      render 'edit'
+    end
+  end
+
+  def destroy
+    render
+  end
+
   private
 
+  def find_account
+    @user = User.find(current_user)
+    @account = @user.accounts.find(params[:account_id])
+  end
+
   def find_transaction
-    # @user = User.find(current_user)
-    # @account = @user.accounts.find(params[:id])
-    @transaction = Transaction.find params[:id]
+    @transaction = Transaction.find(params[:id])
+    @user = User.find(current_user)
+    @account = @user.accounts.find(@transaction.account_id)
   end
 
   def safe_transaction

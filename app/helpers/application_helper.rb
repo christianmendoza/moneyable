@@ -94,4 +94,18 @@ module ApplicationHelper
       "x" << number
     end
   end
+
+  def get_category_id
+    category_id = 22 # id for 'Uncategorized'
+    if (params[:action] == "edit")
+      category_id = @transaction.category_id
+    end
+  end
+
+  def get_transaction_amount
+    amount = "0.00"
+    if (params[:action] == "edit")
+      amount = number_with_precision(@transaction.amount, precision: 2)
+    end
+  end
 end
