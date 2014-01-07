@@ -23,5 +23,5 @@ $(function(){ $(document).foundation(); });
 $('.alert-box').not('.warning').slideDown(function() {
     setTimeout(function() {
         $('.alert-box').slideUp(600);
-    }, '3000');
+    }, '2000');
 });

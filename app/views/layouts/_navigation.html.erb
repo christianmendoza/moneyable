@@ -12,11 +12,21 @@
         <li class="divider"></li>
         <li class=""><a href="">Overview</a></li>
         <li class="divider"></li>
-        <li class="<%= is_active?(user_accounts_path(current_user)) %>"><%= link_to "My Accounts", user_accounts_path(current_user) %></li>
+        <li class="<% if has_accounts? %>has-dropdown<% end %>"><%= link_to "My Accounts", user_accounts_path(current_user) %>
+          <% if has_accounts? %>
+          <% @my_accounts = get_all_accounts %>
+          <ul class="dropdown">
+            <% @my_accounts.each do |a| %>
+            <li><%= link_to a.account_name, account_path(a) %></li>
+            <% end %>
+          </ul>
+          <% end %>
+        </li>
         <li class="divider"></li>
         <li class=""><a href="">Reports</a></li>
         <li class="divider"></li>
-        <li class="<%= is_active?(contact_page_path) %>"><%= link_to "Contact", contact_page_path %></li>
+        <li class="<%= is_active?(contact_page_path) %>"><%= link_to "Contact", contact_page_path %>
+        </li>
         <li class="divider"></li>
         <li class=""><%= link_to "Sign out", destroy_user_session_path, method: :delete %></li>
       <% else %>

@@ -66,11 +66,16 @@ def random_date(years_back=1)
 end
 
 # @transactions = Transaction.where("amount > 300")
-@transactions = Transaction.where("category_id = 12")
+# @transactions = Transaction.where("category_id = 12")
+@transactions = Transaction.where("transaction_type = 1")
 
 @transactions.each do |t|
-  t.amount = 1959.12
-  t.save
+  amount = t.amount
+
+  if amount > 0
+    t.amount = "-" << amount.to_s
+    t.save
+  end
 end
 
 puts "Updated " << @transactions.size << "transactions."

@@ -1,5 +1,7 @@
 <h2>My Accounts</h2>
 
+<% if has_accounts? %>
+
 <table>
   <thead>
     <tr>
@@ -14,7 +16,7 @@
   <tbody>
     <% @accounts.each do |account| %>
       <tr>
-        <td><%= link_to account.account_name, account_path(account) %>
+        <td><%= link_to account.account_name, account_path(account) %></td>
         <td><%= format_account_number(account.account_number) %></td>
         <td><%= find_account_type(account.account_type) %></td>
         <td class="text-right"><%= number_to_currency(account.account_balance) %></td>
@@ -24,5 +26,12 @@
     <% end %>
   </tbody>
 </table>
+
+<% else %>
+
+<h4>Looks like you don't have any accounts</h4>
+<%= get_create_button %>
+
+<% end %>
 
 <p><%= link_to "Create an account", new_user_account_path(current_user) %></p>

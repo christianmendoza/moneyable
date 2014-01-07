@@ -19,7 +19,7 @@
       <td><%= find_transaction_type(transaction.transaction_type) %></td>
       <td><%= transaction.description %></td>
       <td><%= get_category_name(transaction.category_id) %></td>
-      <td class="text-right"><%= format_amount(transaction.transaction_type, number_to_currency(transaction.amount)) %></td>
+      <td class="text-right"><%= number_to_currency(transaction.amount) %></td>
       <td><%= get_transaction_status(transaction.transaction_cleared) %></td>
       <td class="text-right"><%= number_to_currency(@account.account_balance) %></td>
     </tr>

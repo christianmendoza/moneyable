@@ -7,6 +7,18 @@ module ApplicationHelper
     end
   end
 
+  # def transactions_sum
+  #   @transactions.sum :amount
+  # end
+
+  # def transactions_sum_cleared
+  #   @transactions.where(transaction_cleared: true).sum :amount
+  # end
+
+  # def account_balance
+  #   @account.account_balance + transactions_sum_cleared
+  # end
+
   def get_category_name(id)
     if id.nil?
       cat_name = ''
@@ -22,7 +34,7 @@ module ApplicationHelper
     account.acount_name
   end
   
-  def get_current_account_balance(id)
+  def get_initial_account_balance(id)
     account = Account.find(id)
     account.account_balance
   end
@@ -31,9 +43,9 @@ module ApplicationHelper
     account_types = [
       ["Checking", "1"],
       ["Savings","2"],
-      ["Credit Card", "3"],
-      ["Credit Line", "4"],
-      ["Loan", "5"]
+      ["Credit Card", "3"]
+      # ["Credit Line", "4"],
+      # ["Loan", "5"]
     ]
     account_types
   end
@@ -46,10 +58,10 @@ module ApplicationHelper
       "Savings"
     when 3
       "Credit Card"
-    when 4
-      "Credit Line"
-    when 5
-      "Loan"
+    # when 4
+    #   "Credit Line"
+    # when 5
+    #   "Loan"
     else
       ""
     end
@@ -95,17 +107,11 @@ module ApplicationHelper
     end
   end
 
-  def get_category_id
-    category_id = 22 # id for 'Uncategorized'
-    if (params[:action] == "edit")
-      category_id = @transaction.category_id
-    end
+  def has_accounts?
+    !current_user.accounts.empty?
   end
 
-  def get_transaction_amount
-    amount = "0.00"
-    if (params[:action] == "edit")
-      amount = number_with_precision(@transaction.amount, precision: 2)
-    end
+  def get_all_accounts
+    current_user.accounts
   end
 end

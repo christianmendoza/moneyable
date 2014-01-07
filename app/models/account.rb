@@ -12,4 +12,21 @@ class Account < ActiveRecord::Base
   validates :account_number, format: { with: /\A[0-9]{4}\z/ }, allow_blank: true
   validates :account_type, numericality: { only_integer: true, greater_than_or_equal_to: 1, less_than_or_equal_to: 5 }
   validates :account_balance, numericality: { greater_than_or_equal_to: 0 }, format: { with: /\A\d+??(?:\.\d{0,2})?\z/ }
+
+  attr_accessor :balance
+
+  class << self
+    def transactions_sum_cleared      
+      transactions.cleared.sum :amount
+    end
+
+    def cleared_balance
+      self.balance = transactions_sum_cleared + self.account_balance
+    end
+  end
 end
+
+
+  # def self.search_for (query)
+  #   where('name LIKE :query OR description LIKE :query', query: "%#{query}%")
+  # end
