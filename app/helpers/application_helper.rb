@@ -114,4 +114,26 @@ module ApplicationHelper
   def get_all_accounts
     current_user.accounts
   end
+
+  def get_period_select(period)
+    # credit: http://stackoverflow.com/questions/13898795/how-to-loop-through-months-in-ruby-on-rails
+
+    start_date = period.months.ago.to_date
+    # => Tue, 08 Jan 2013
+
+    end_date = Date.today
+    # => Tue, 07 Jan 2014
+
+    number_of_months = (end_date.year * 12 + end_date.month) - (start_date.year * 12 + start_date.month)
+    # => 12
+    
+    dates = number_of_months.times.each_with_object([]) do |count, array|
+      date = start_date.beginning_of_month + (count+1).months
+      array << [date.strftime("%B %Y"), date.to_s]
+    end
+    dates.reverse!
+    # => [["January 2014", "2014-01-01"],...,["February 2013", "2013-02-01"]]
+
+    select_tag 'period', options_for_select(dates, selected: dates.first.second)
+  end
 end

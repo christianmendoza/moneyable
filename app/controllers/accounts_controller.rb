@@ -23,7 +23,7 @@ class AccountsController < ApplicationController
   end
 
   def show
-    @transactions = @account.transactions.order(date_of: :asc) #.page(params[:page]).per(2)
+    @transactions = @account.transactions.period("2012-10-01").order(date_of: :asc) #.page(params[:page]).per(2)
   end
 
   def edit

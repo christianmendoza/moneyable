@@ -3,6 +3,13 @@
     <h2 class="left">Balance: <%= number_to_currency(@account.account_balance) %></h2>
 </div>
 
+<%= get_period_select(12) %>
+<%# form_for "period", :url => { :action => "show" } do |f| %>
+  <%# dates = get_period_hash(12) %> 
+  <%#= select_tag 'date-period', options_for_select(dates, selected: dates.first.second),
+  { :onchange => "this.form.submit();"} %>
+<%# end %>
+
 <table>
   <thead>
     <tr>
