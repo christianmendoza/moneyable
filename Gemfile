@@ -18,10 +18,10 @@ group :development do
   gem 'faker', '~> 1.2.0'
 end
 
-# group :production do
-#   gem 'pg'
-#   gem 'rails_12factor'
-# end
+group :production do
+  gem 'pg'
+  gem 'rails_12factor'
+end
 
 group :assets do
   gem 'sass-rails', '~> 4.0.0'
