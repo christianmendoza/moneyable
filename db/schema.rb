@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131215055115) do
+ActiveRecord::Schema.define(version: 20140109050319) do
 
   create_table "accounts", force: true do |t|
     t.integer  "account_type"
@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(version: 20131215055115) do
     t.integer  "category_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.decimal  "balance_to_date",     precision: 10, scale: 2, default: 0.0
   end
 
   add_index "transactions", ["account_id"], name: "index_transactions_on_account_id"
