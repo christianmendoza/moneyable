@@ -8,7 +8,9 @@ module TransactionsHelper
   end
 
   def get_category_id
-    category_id = 22 # id for 'Uncategorized'
+    category_id = 22
+    # id for 'Uncategorized'
+    
     if params[:action].eql? "edit"
       category_id = @transaction.category_id
     end
