@@ -1,6 +1,6 @@
 class Account < ActiveRecord::Base
   #attr_accessible :account_type, :account_name, :account_number, :account_balance
-  has_many :transactions, dependent: :destroy#, order: 'date_of ASC'
+  has_many :transactions, dependent: :destroy, order: 'date_of ASC'
   belongs_to :user
 
   # account_name is required
@@ -19,13 +19,8 @@ class Account < ActiveRecord::Base
     def transactions_sum_cleared      
       transactions.cleared.sum :amount
     end
-
-    def cleared_balance
-      self.balance = transactions_sum_cleared + self.account_balance
-    end
   end
 end
-
 
   # def self.search_for (query)
   #   where('name LIKE :query OR description LIKE :query', query: "%#{query}%")

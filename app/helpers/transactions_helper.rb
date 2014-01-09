@@ -10,7 +10,7 @@ module TransactionsHelper
   def get_category_id
     category_id = 22
     # id for 'Uncategorized'
-    
+
     if params[:action].eql? "edit"
       category_id = @transaction.category_id
     end
@@ -28,16 +28,20 @@ module TransactionsHelper
     amount
   end
 
-  def get_total(current_transaction)
-    if current_transaction.id == @transactions.first.id
-      @previous_transaction = Transaction.find(current_transaction.id)
-      @previous_balance = @account.account_balance + current_transaction.amount
-    else
-      @previous_balance = @previous_balance + current_transaction.amount
-      @previous_transaction = Transaction.find(current_transaction.id)
-    end
-    @previous_balance
+  def get_balance(transaction)
+    balance = @account.account_balance + @transactions.balance_to_transaction(transaction)
   end
+
+  # def get_total(current_transaction)
+  #   if current_transaction.id == @transactions.first.id
+  #     @previous_transaction = Transaction.find(current_transaction.id)
+  #     @previous_balance = @account.account_balance + current_transaction.amount
+  #   else
+  #     @previous_balance = @previous_balance + current_transaction.amount
+  #     @previous_transaction = Transaction.find(current_transaction.id)
+  #   end
+  #   @previous_balance
+  # end
 
   def format_amount(type, amount)
     if type.eql? 1

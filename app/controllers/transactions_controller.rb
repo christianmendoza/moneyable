@@ -31,6 +31,8 @@ class TransactionsController < ApplicationController
   end
 
   def update
+    @transactions = @account.transactions
+    @transaction.balance_to_date = view_context.get_balance(@transaction)
     if @transaction.update(safe_transaction)
       flash[:notice] = "Transaction updated."
       redirect_to account_path(@account)
@@ -57,6 +59,6 @@ class TransactionsController < ApplicationController
   end
 
   def safe_transaction
-    params.require(:transaction).permit(:date_of, :transaction_type, :description, :amount, :transaction_cleared, :notes, :account_id, :category_id)
+    params.require(:transaction).permit(:date_of, :transaction_type, :description, :amount, :transaction_cleared, :notes, :account_id, :category_id, :balance_to_date)
   end
 end

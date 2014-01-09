@@ -31,13 +31,13 @@
       <td><%= get_category_name(transaction.category_id) %></td>
       <td class="text-right"><%= number_to_currency(transaction.amount) %></td>
       <td><%= get_transaction_status(transaction.transaction_cleared) %></td>
-      <td class="text-right"><%= number_to_currency(get_total(transaction)) %></td>
+      <td class="text-right"><%= number_to_currency(transaction.balance_to_date) %></td>
     </tr>
     <% end %>
   </tbody>
 </table>
 
-<%= paginate @transactions %>
+<%#= paginate @transactions %>
 
 <h4>Account</h4>
 <p><%= link_to "Create an account", new_user_account_path(current_user) %></p>

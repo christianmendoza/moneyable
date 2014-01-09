@@ -16,6 +16,10 @@ class Transaction < ActiveRecord::Base
       Date.parse(period).beginning_of_month, Date.parse(period).end_of_month)
   end
 
+  def self.balance_to_transaction(transaction)
+    where(["date_of < ? or (date_of = ? and ID <= ?)", transaction.date_of, transaction.date_of, transaction.id]).sum(:amount)
+  end
+
   scope :debited, -> { where(transaction_type: 1) }
   scope :credited, -> { where(transaction_type: 2) }
   scope :cleared, -> { where(transaction_cleared: true) }

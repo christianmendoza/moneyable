@@ -24,7 +24,7 @@ class AccountsController < ApplicationController
 
   def show
     #@transactions = @account.transactions.period("2012-10-01").order(date_of: :asc) #.page(params[:page]).per(2)
-    @transactions = @account.transactions.order(date_of: :asc).page(params[:page]).per(5)
+    @transactions = @account.transactions.order(date_of: :asc)#.page(params[:page]).per(2)
   end
 
   def edit
