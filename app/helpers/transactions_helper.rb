@@ -42,11 +42,4 @@ module TransactionsHelper
   #   end
   #   @previous_balance
   # end
-
-  def format_amount(type, amount)
-    if type.eql? 1
-      amount = "-" << amount
-    end
-    amount
-  end
 end

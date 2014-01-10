@@ -10,19 +10,30 @@ class Transaction < ActiveRecord::Base
         Date.today.beginning_of_month, Date.today.end_of_month)
     }
 
-  def self.period(period)
+  scope :debited, -> { where(transaction_type: 1) }
+  scope :credited, -> { where(transaction_type: 2) }
+  scope :cleared, -> { where(transaction_cleared: true) }  
+
+  class << self
+    def period(period)
     # Date.parse("2013-12-01")
     where("date_of >= ? and date_of <= ?",
       Date.parse(period).beginning_of_month, Date.parse(period).end_of_month)
-  end
+    end
 
-  def self.balance_to_transaction(transaction)
-    where(["date_of < ? or (date_of = ? and ID <= ?)", transaction.date_of, transaction.date_of, transaction.id]).sum(:amount)
-  end
+    def get_all_transactions_since(transaction)
+      where(["date_of > ? or (date_of = ? and ID <= ?)",
+        transaction.date_of, transaction.date_of, transaction.id])
+    end
 
-  scope :debited, -> { where(transaction_type: 1) }
-  scope :credited, -> { where(transaction_type: 2) }
-  scope :cleared, -> { where(transaction_cleared: true) }
+    def update_transaction_balances(transactions)
+      amount = 0.00
+      transactions.each do |t|
+        t.balance_to_date = get_balance(t)
+        t.save
+      end
+    end
+  end
 
   private
 
