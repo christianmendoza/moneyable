@@ -21,17 +21,9 @@ class Transaction < ActiveRecord::Base
       Date.parse(period).beginning_of_month, Date.parse(period).end_of_month)
     end
 
-    def get_all_transactions_since(transaction)
+    def get_all_transactions_after(transaction)
       where(["date_of > ? or (date_of = ? and ID <= ?)",
         transaction.date_of, transaction.date_of, transaction.id])
-    end
-
-    def update_transaction_balances(transactions)
-      amount = 0.00
-      transactions.each do |t|
-        t.balance_to_date = get_balance(t)
-        t.save
-      end
     end
   end
 
@@ -46,6 +38,6 @@ class Transaction < ActiveRecord::Base
   end
 
   def format_debit_amount
-    self.amount = "-" << self.amount.to_s
+    self.amount = -1 * self.amount
   end
 end

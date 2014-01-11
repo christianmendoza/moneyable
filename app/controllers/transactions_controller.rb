@@ -16,7 +16,7 @@ class TransactionsController < ApplicationController
 
     if @transaction.save
       flash[:notice] = "Transaction added."
-      redirect_to @transaction
+      redirect_to account_path(@account)
     else
       render 'new'
     end
@@ -31,9 +31,9 @@ class TransactionsController < ApplicationController
   end
 
   def update
-    @transactions = @account.transactions
-    @transaction.balance_to_date = view_context.get_balance(@transaction)
+    @transactions = @account.transactions.get_all_transactions_after(@transaction)
     if @transaction.update(safe_transaction)
+      view_context.update_transaction_balances(@transactions)
       flash[:notice] = "Transaction updated."
       redirect_to account_path(@account)
     else
@@ -59,6 +59,6 @@ class TransactionsController < ApplicationController
   end
 
   def safe_transaction
-    params.require(:transaction).permit(:date_of, :transaction_type, :description, :amount, :transaction_cleared, :notes, :account_id, :category_id, :balance_to_date)
+    params.require(:transaction).permit(:date_of, :transaction_type, :description, :amount, :transaction_cleared, :notes, :account_id, :category_id)
   end
 end

@@ -83,10 +83,10 @@ module ApplicationHelper
       "Debit"
     when 2
       "Credit"
-    when 3
-      "Transfer - In"
-    when 4
-      "Transfer - Out"
+    # when 3
+    #   "Transfer - In"
+    # when 4
+    #   "Transfer - Out"
     else
       ""
     end

@@ -28,18 +28,24 @@ module TransactionsHelper
     amount
   end
 
-  def get_balance(transaction)
-    balance = @account.account_balance + @transactions.balance_to_transaction(transaction)
+  def get_balance_to_date(transaction)
+    account = Account.find(transaction.account_id)
+    #initial_balance = account.account_balance
+    sum_previous_amounts = account.transactions.where(["date_of < ? or (date_of = ? and ID <= ?)",
+        transaction.date_of, transaction.date_of, transaction.id]).sum(:amount)
+    #balance = initial_balance + sum_previous_amounts
+    #balance
   end
 
-  # def get_total(current_transaction)
-  #   if current_transaction.id == @transactions.first.id
-  #     @previous_transaction = Transaction.find(current_transaction.id)
-  #     @previous_balance = @account.account_balance + current_transaction.amount
-  #   else
-  #     @previous_balance = @previous_balance + current_transaction.amount
-  #     @previous_transaction = Transaction.find(current_transaction.id)
-  #   end
-  #   @previous_balance
-  # end
+  def update_transaction_balances(transactions)
+    transactions.each do |t|
+      t.balance_to_date = get_balance_to_date(t)
+      t.save!
+    end
+  end
+
+  def balance_to_transaction(transaction)
+    transactions = get_all_transactions_after(transaction)
+    update_transaction_balances(transactions)
+  end
 end
