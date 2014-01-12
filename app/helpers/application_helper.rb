@@ -7,18 +7,6 @@ module ApplicationHelper
     end
   end
 
-  # def transactions_sum
-  #   @transactions.sum :amount
-  # end
-
-  # def transactions_sum_cleared
-  #   @transactions.where(transaction_cleared: true).sum :amount
-  # end
-
-  # def account_balance
-  #   @account.account_balance + transactions_sum_cleared
-  # end
-
   def get_category_name(id)
     if id.nil?
       cat_name = ''
@@ -115,6 +103,10 @@ module ApplicationHelper
     current_user.accounts
   end
 
+  def get_current_month
+    Date.today.beginning_of_month.to_s
+  end
+
   def get_period_select(period)
     # credit: http://stackoverflow.com/questions/13898795/how-to-loop-through-months-in-ruby-on-rails
 
@@ -134,6 +126,22 @@ module ApplicationHelper
     dates.reverse!
     # => [["January 2014", "2014-01-01"],...,["February 2013", "2013-02-01"]]
 
-    select_tag 'period', options_for_select(dates, selected: dates.first.second)
+    #select_tag 'date_period', options_for_select(dates, selected: dates.first.second)
+  end
+
+  def gchart_get_amounts(hash)
+    amounts = []
+    hash.each {|key, value| amounts << value.abs }
+    amounts
+  end
+
+  def gchart_get_categories(hash)
+    categories = []
+    hash.each {|key, value| categories << key }
+    categories
+  end
+
+  def gchart_get_max(array)
+    array.max
   end
 end

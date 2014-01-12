@@ -1,0 +1,10 @@
+      <tr>
+        <td><%= transaction.date_of %></td>
+        <td><%= find_transaction_type(transaction.transaction_type) %></td>
+        <td><%= link_to transaction.description, edit_transaction_path(transaction) %></td>
+        <td><%= get_category_name(transaction.category_id) %></td>
+        <td class="text-right"><%= number_to_currency(transaction.amount) %></td>
+        <!-- <td><%= get_transaction_status(transaction.transaction_cleared) %></td> -->
+        <td class="text-right"><%= number_to_currency(transaction.balance_to_date) %></td>
+        <td><%= link_to "Del", transaction_path(transaction), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>

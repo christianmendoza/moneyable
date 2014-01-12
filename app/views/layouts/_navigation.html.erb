@@ -10,7 +10,7 @@
     <ul class="right">
       <%  if user_signed_in? %>
         <li class="divider"></li>
-        <li class=""><a href="">Overview</a></li>
+        <li class=""><%= link_to "Overview", overview_page_path %></li>
         <li class="divider"></li>
         <li class="<% if has_accounts? %>has-dropdown<% end %>"><%= link_to "My Accounts", user_accounts_path(current_user) %>
           <% if has_accounts? %>
@@ -23,7 +23,7 @@
           <% end %>
         </li>
         <li class="divider"></li>
-        <li class=""><a href="">Reports</a></li>
+        <li class=""><%= link_to "Reports", reports_page_path %></li>
         <li class="divider"></li>
         <li class="<%= is_active?(contact_page_path) %>"><%= link_to "Contact", contact_page_path %>
         </li>

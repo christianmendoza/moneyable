@@ -1,0 +1,21 @@
+<div class="clearfix">
+  <h3>Reports</h3>
+  <h5><%= Date.parse(get_current_month).strftime("%B %Y") %></h5>
+</div>
+
+<% @accounts.each do |account| %>
+  <% most_expenses = account.transactions.get_expenses(get_current_month) %>
+  <% gchart_data = gchart_get_amounts(most_expenses) %>
+  <% gchart_legend = gchart_get_categories(most_expenses) %>
+  <% gchart_max = gchart_get_max(gchart_data) %>
+
+  <%= image_tag(Gchart.pie(
+        size: '350x200',
+        title: account.account_name,
+        data: gchart_data,
+        labels: gchart_legend,
+        bar_colors: ['3366cc', 'dc3912', 'ff9900', '109618', '990099']
+        )
+      )
+  %>
+<% end %>

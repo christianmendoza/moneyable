@@ -23,8 +23,13 @@ class AccountsController < ApplicationController
   end
 
   def show
-    #@transactions = @account.transactions.period("2012-10-01").order(date_of: :asc) #.page(params[:page]).per(2)
-    @transactions = @account.transactions.order(date_of: :asc)#.page(params[:page]).per(2)
+    month = view_context.get_current_month
+
+    if params.has_key?("period")
+      month = params[:period][:date]
+    end
+
+    @transactions = @account.transactions.period(month)#.order(date_of: :asc).page(params[:page]).per(2)  
   end
 
   def edit

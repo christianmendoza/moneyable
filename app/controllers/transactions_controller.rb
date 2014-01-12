@@ -1,6 +1,6 @@
 class TransactionsController < ApplicationController
   before_action :authenticate_user!
-  before_action :find_account, only: [:index, :new]
+  before_action :find_account, only: [:index, :new, :create]
   before_action :find_transaction, only: [:edit, :show, :update, :destroy]
 
   def index
@@ -15,6 +15,7 @@ class TransactionsController < ApplicationController
     @transaction = Transaction.new(safe_transaction)
 
     if @transaction.save
+      balance_transactions
       flash[:notice] = "Transaction added."
       redirect_to account_path(@account)
     else
@@ -31,9 +32,8 @@ class TransactionsController < ApplicationController
   end
 
   def update
-    @transactions = @account.transactions.get_all_transactions_after(@transaction)
     if @transaction.update(safe_transaction)
-      view_context.update_transaction_balances(@transactions)
+      balance_transactions
       flash[:notice] = "Transaction updated."
       redirect_to account_path(@account)
     else
@@ -42,7 +42,10 @@ class TransactionsController < ApplicationController
   end
 
   def destroy
-    render
+    @transaction.destroy
+    balance_transactions
+    flash[:alert] = "Transaction was deleted."
+    redirect_to account_path(@account)
   end
 
   private
@@ -59,6 +62,11 @@ class TransactionsController < ApplicationController
   end
 
   def safe_transaction
-    params.require(:transaction).permit(:date_of, :transaction_type, :description, :amount, :transaction_cleared, :notes, :account_id, :category_id)
+    params.require(:transaction).permit(:date_of, :transaction_type, :description, :amount, :transaction_cleared, :notes, :account_id, :category_id, :balance_to_date)
+  end
+
+  def balance_transactions
+    @transactions = @account.transactions.get_all_transactions_after(@transaction)
+    view_context.update_transaction_balances(@transactions)
   end
 end

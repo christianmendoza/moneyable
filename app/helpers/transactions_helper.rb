@@ -30,11 +30,11 @@ module TransactionsHelper
 
   def get_balance_to_date(transaction)
     account = Account.find(transaction.account_id)
-    #initial_balance = account.account_balance
+    initial_balance = account.account_balance
     sum_previous_amounts = account.transactions.where(["date_of < ? or (date_of = ? and ID <= ?)",
         transaction.date_of, transaction.date_of, transaction.id]).sum(:amount)
-    #balance = initial_balance + sum_previous_amounts
-    #balance
+    balance = initial_balance + sum_previous_amounts
+    balance
   end
 
   def update_transaction_balances(transactions)

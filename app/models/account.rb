@@ -13,7 +13,9 @@ class Account < ActiveRecord::Base
   validates :account_type, numericality: { only_integer: true, greater_than_or_equal_to: 1, less_than_or_equal_to: 5 }
   validates :account_balance, numericality: { greater_than_or_equal_to: 0 }, format: { with: /\A\d+??(?:\.\d{0,2})?\z/ }
 
-  attr_accessor :balance
+  def balance
+    self.account_balance + self.transactions.sum(:amount)
+  end
 
   class << self
     def transactions_sum_cleared      

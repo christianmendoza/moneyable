@@ -1,0 +1,15 @@
+<div class="row">
+  <div class="medium-3 columns">
+    <%= simple_form_for "period", method: :get, remote: true do |f| %>
+      <% dates = get_period_select(6) %>
+      <%= f.input "date",
+        collection: dates,
+        selected: dates.first.second,
+        include_blank: false,
+        label: false %>
+      <%= f.button :submit, "Go",
+          class: "tiny" %>
+    <% end %>
+  </div>
+  <!-- <div class="medium-9 columns">9 columns</div> -->
+</div>

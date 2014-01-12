@@ -1,0 +1,4 @@
+$('#transactions').empty();
+<%# @transactions.each do |transaction| %>
+  $("<%= escape_javascript(render 'all_transactions') %>").prependTo('#transactions');
+<%# end %>

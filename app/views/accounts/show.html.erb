@@ -1,43 +1,15 @@
 <div class="clearfix">
-    <h2 class="right"><%= @account.account_name %> (<%= format_account_number(@account.account_number) %>)</h2>
-    <h2 class="left">Balance: <%= number_to_currency(@account.account_balance) %></h2>
+  <h3 class="left">Balance: <%= number_to_currency(@account.balance) %></h3>
+  <h3 class="right"><%= @account.account_name %> (<%= format_account_number(@account.account_number) %>)</h3>
 </div>
 
-<%= get_period_select(12) %>
-<%# form_for "period", :url => { :action => "show" } do |f| %>
-  <%# dates = get_period_hash(12) %> 
-  <%#= select_tag 'date-period', options_for_select(dates, selected: dates.first.second),
-  { :onchange => "this.form.submit();"} %>
-<%# end %>
+<%= render 'month_period_form' %>
 
-<table>
-  <thead>
-    <tr>
-      <th>Date</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Category</th>
-      <th>Amount</th>
-      <th>Status</th>
-      <th>Balance</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @transactions.each do |transaction| %>
-    <tr>
-      <td><%= transaction.date_of %></td>
-      <td><%= find_transaction_type(transaction.transaction_type) %></td>
-      <td><%= link_to transaction.description, edit_transaction_path(transaction) %></td>
-      <td><%= get_category_name(transaction.category_id) %></td>
-      <td class="text-right"><%= number_to_currency(transaction.amount.abs) %></td>
-      <td><%= get_transaction_status(transaction.transaction_cleared) %></td>
-      <td class="text-right"><%= number_to_currency(transaction.balance_to_date) %></td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
+<div id="transactions">
+  <%= render 'all_transactions' %>
+</div>
 
-<%#= paginate @transactions %>
+<%#= paginate @transactions, params: { controller: "accounts", action: 'show', id: @account.id, period: { date: "2012-12-01"} } %>
 
 <h4>Account</h4>
 <p><%= link_to "Create an account", new_user_account_path(current_user) %></p>
