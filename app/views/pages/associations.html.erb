@@ -1,1 +1,197 @@
-associations.html.erb
+<div id="row">
+  <div class="medium-10 columns">
+    <h3>Models</h3>
+    <div class="desc">
+      <h4>1. User</h4>
+      <h5>Associations: <code>has_many :accounts</code><code>dependent: :destroy</code><code>has_many :transactions, through: :accounts</code></h5>
+
+      <p>A user has many accounts. Deleting a user will delete all of his accounts and transactions. A user has many transactions through accounts.</p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>COLUMN</th>
+            <th>first_name</th>
+            <th>last_name</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>TYPE</td>
+            <td>:string</td>
+            <td>:string</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="desc">
+      <h4>2. Account</h4>
+      <h5>Associations: <code>belongs_to :user</code> <code>has_many :transactions</code> <code>dependent: :destroy</code></h5>
+      <p>An account has many transactions. An account can be of type 'checking', 'savings' or 'credit card'. A new account can be set with a starting balance. Deleting an account will delete all its transactions.</p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>COLUMN</th>
+            <th>account_type</th>
+            <th>account_name</th>
+            <th>account_number</th>
+            <th>account_balance</th>
+            <th>user_id</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>TYPE</td>
+            <td>:integer</td>
+            <td>:string</td>
+            <td>:string</td>
+            <td>:decimal</td>
+            <td>:integer</td>
+          </tr>
+          <tr>
+            <td>NOTES</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>foreign_key</td>
+          </tr>          
+        </tbody>
+      </table>
+    </div>
+
+    <div class="desc">
+      <h4>3. Transaction</h4>
+      <h5>Associations: <code>belongs_to :account</code> <code>belongs_to :category</code></h5>
+      <p>Transactions belong to an account and to a specific category.</p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>COLUMN</th>
+            <th>date_of</th>
+            <th>transaction_type</th>
+            <th>description</th>
+            <th>amount</th>
+            <th>transaction_cleared</th>
+            <th>notes</th>
+            <th>account_id</th>
+            <th>category_id</th>
+            <th>balance_to_date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>TYPE</td>
+            <td>:date</td>
+            <td>:integer</td>
+            <td>:string</td>
+            <td>:decimal</td>
+            <td>:boolean</td>
+            <td>:string</td>
+            <td>:integer</td>
+            <td>:integer</td>
+            <td>:decimal</td>
+          </tr>
+          <tr>
+            <td>NOTES</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>foreign_key</td>
+            <td>foreign_key</td>
+            <td></td>
+          </tr>          
+        </tbody>
+      </table>
+    </div>
+
+    <div class="desc">
+      <h4>4. Category</h4>
+      <h5>Associations: <code>has_many :transactions</code> <code>has_many :subcategories</code> <code>belongs_to :parent_category</code></h5>
+      <p>A category can have one of more subcategories. A subcategory belongs to its parent category. A category can have many transactions. Deleting a category will update the transactions accordingly.</p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>COLUMN</th>
+            <th>category_name</th>
+            <th>parent_id</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>TYPE</td>
+            <td>:string</td>
+            <td>:integer</td>
+          </tr>
+          <tr>
+            <td>NOTES</td>
+            <td></td>
+            <td>foreign_key</td>
+          </tr>          
+        </tbody>
+      </table>  
+    </div>
+
+    <!-- <div class="desc">
+      <h4>Transfer</h4>
+      <p>A transfers is two transactions - XFER OUT is a transaction withdrawal from one account, XFER IN is a transaction deposit to another account.</p>
+      
+      COLUMN  from_account_id to_account_id amount  notes date
+      TYPE  :integer  :integer  :decimal  :string :date
+    </div> -->
+
+    <div class="row">
+      <div class="large-4 columns">
+        <h3>Controllers</h3>
+        <ul>
+          <li>accounts</li>
+          <li>categories</li>
+          <li>transactions</li>
+          <li>transfers</li>
+          <li>pages</li>
+        </ul>
+      </div>
+        
+      <div class="large-4 columns">
+        <h3>Gems</h3>
+        <ul>
+          <li>foundation-rails (front-end)</li>
+          <li>devise (authentication)</li>
+          <li>simple_form (easy forms)</li>
+          <li>faker (create fake data, testing, seeding)</li>
+          <li>googlecharts (sexy charts)</li>
+          <li>kaminari (pagination)*</li>
+          <li>money (money library)*</li>
+          <li>paperclip (upload management)*</li>
+          <li>carrierwave (file attachment)*</li>
+          <li>best in place (in-place editing)*</li>
+          <li>* denotes a nice-to-have feature</li>
+        </ul>
+      </div>
+        
+      <div class="large-4 columns">
+        <h3>UI</h3>
+        <ul>
+          <li>foundation (front-end framework)</li>
+          <li>font awesome (icons)</li>
+          <li>toni spinozzi (logo)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  h3 { color: #109618; font-weight: bold; }
+  h4 { color: #3366cc; font-weight: bold; }
+  .desc { border-bottom: 1px solid #bbb; padding-bottom: 2em; margin-bottom: 3em; }
+  h5 { font-weight: bold; }
+  code { display: block; }
+</style>
