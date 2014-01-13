@@ -41,15 +41,24 @@ class Transaction < ActiveRecord::Base
     end
 
     def get_expenses_amount(month)
-      period(month).where("transaction_type = 1").sum(:amount).abs
+      period(month).
+      where("transaction_type = 1").
+      sum(:amount).abs
     end
 
     def get_incomes_amount(month)
-      period(month).where("transaction_type = 2").sum(:amount)
+      period(month).
+      where("transaction_type = 2").
+      sum(:amount)
     end
 
     def get_expenses(month)
-      period(month).where("transaction_type = 1").reorder(amount: :desc).includes(:category).group("categories.category_name").sum(:amount)
+      period(month).
+      where("transaction_type = 1").
+      reorder(amount: :desc).
+      includes(:category).
+      group("categories.category_name").
+      sum("amount")
     end
   end
 
