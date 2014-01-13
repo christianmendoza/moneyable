@@ -14,7 +14,7 @@ class PagesController < ApplicationController
     @month = view_context.get_current_month
   end
 
-  def features
+  def about
     render
   end
 
