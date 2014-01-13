@@ -1,15 +1,25 @@
 <div class="row">
-  <div class="medium-3 columns">
-    <%= simple_form_for "period", method: :get, remote: true do |f| %>
-      <% dates = get_period_select(6) %>
-      <%= f.input "date",
-        collection: dates,
-        selected: dates.first.second,
-        include_blank: false,
-        label: false %>
-      <%= f.button :submit, "Go",
-          class: "tiny" %>
-    <% end %>
+  <div class="clearfix">
+    <div class="left">
+      <div class="medium-12 columns">
+        <%= simple_form_for "period", method: :get, remote: true do |f| %>
+          <% dates = get_period_select(6) %>
+          <%= f.input "date",
+            collection: dates,
+            selected: dates.first.second,
+            include_blank: false,
+            label: false %>
+          <%= f.button :submit, "Go",
+              class: "tiny" %>
+        <% end %>
+      </div>
+    </div>
+    
+    <div class="right">
+      <div class="medium-12 columns">
+        <p>Account: <%= link_to "Create", new_user_account_path(current_user) %> | <%= link_to "Edit", edit_account_path(@account) %> | <%= link_to 'Delete', account_path(@account), method: :delete, data: { confirm: 'Are you sure?' } %><br>
+          <%= link_to "Add a new transaction", new_account_transaction_path(@account) %></p>
+      </div>
+    </div>  
   </div>
-  <!-- <div class="medium-9 columns">9 columns</div> -->
 </div>

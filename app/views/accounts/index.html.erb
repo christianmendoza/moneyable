@@ -1,39 +1,42 @@
-<h2>My Accounts</h2>
+<div class="row">
+  <div class="medium-12 columns">
+    <h3>My Accounts</h3>
+    <% if user_signed_in? %><h5 class="left">Welcome, <%= current_user.first_name %></h5><% end %>
+    <h5 class="right"><%= link_to "Create a new account", new_user_account_path(current_user) %></h5>
+    <% if has_accounts? %>
+      
+    <div id="accounts">
+      <table>
+        <thead>
+          <tr>
+            <th>Account</th>
+            <th>Account Number</th>
+            <th>Account Type</th>
+            <th>Balance</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @accounts.each do |account| %>
+            <tr>
+              <td><%= link_to account.account_name, account_path(account) %></td>
+              <td><%= format_account_number(account.account_number) %></td>
+              <td><%= find_account_type(account.account_type) %></td>
+              <td class="text-right"><%= number_to_currency(account.balance) %></td>
+              <td class="text-center"><%= get_edit_account_button(account) %></td>
+              <td class="text-center"><%= get_delete_account_button(account) %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
 
-<% if has_accounts? %>
-  
-<div id="accounts">
-  <table>
-    <thead>
-      <tr>
-        <th>Account</th>
-        <th>Account Number</th>
-        <th>Account Type</th>
-        <th>Balance</th>
-        <th></th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @accounts.each do |account| %>
-        <tr>
-          <td><%= account.account_name %></td>
-          <td><%= format_account_number(account.account_number) %></td>
-          <td><%= find_account_type(account.account_type) %></td>
-          <td class="text-right"><%= number_to_currency(account.balance) %></td>
-          <td class="text-center"><%= get_edit_account_button(account) %></td>
-          <td class="text-center"><%= get_delete_account_button(account) %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+    <% else %>
+
+    <h5>It looks like you don't have any accounts. Let's set one up.</h5>
+    <%= get_create_account_button %>
+
+    <% end %>
+  </div>
 </div>
-
-<% else %>
-
-<h5>It looks like you don't have any accounts. Let's set one up.</h5>
-<%= get_create_account_button %>
-
-<% end %>
-
-<p><%#= link_to "Create an account", new_user_account_path(current_user) %></p>
