@@ -1,4 +1,8 @@
 $('#transactions').empty();
 <%# @transactions.each do |transaction| %>
-  $("<%= escape_javascript(render 'all_transactions') %>").prependTo('#transactions');
+  <% if @transactions.empty? %>
+    $("<p>No transactions found.</p>").prependTo('#transactions');
+  <% else %>
+    $("<%= escape_javascript(render 'all_transactions') %>").prependTo('#transactions');
+  <% end %>
 <%# end %>
