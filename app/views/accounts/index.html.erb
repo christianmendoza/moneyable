@@ -1,37 +1,39 @@
 <h2>My Accounts</h2>
 
 <% if has_accounts? %>
-
-<table>
-  <thead>
-    <tr>
-      <th>Account</th>
-      <th>Account Number</th>
-      <th>Account Type</th>
-      <th>Balance</th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @accounts.each do |account| %>
+  
+<div id="accounts">
+  <table>
+    <thead>
       <tr>
-        <td><%= link_to account.account_name, account_path(account) %></td>
-        <td><%= format_account_number(account.account_number) %></td>
-        <td><%= find_account_type(account.account_type) %></td>
-        <td class="text-right"><%= number_to_currency(account.balance) %></td>
-        <td><%= link_to "Edit", edit_account_path(account) %></td>
-        <td><%= link_to 'Delete', account_path(account), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th>Account</th>
+        <th>Account Number</th>
+        <th>Account Type</th>
+        <th>Balance</th>
+        <th></th>
+        <th></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @accounts.each do |account| %>
+        <tr>
+          <td><%= account.account_name %></td>
+          <td><%= format_account_number(account.account_number) %></td>
+          <td><%= find_account_type(account.account_type) %></td>
+          <td class="text-right"><%= number_to_currency(account.balance) %></td>
+          <td class="text-center"><%= get_edit_account_button(account) %></td>
+          <td class="text-center"><%= get_delete_account_button(account) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 
 <% else %>
 
-<h4>Looks like you don't have any accounts</h4>
-<%= get_create_button %>
+<h5>It looks like you don't have any accounts. Let's set one up.</h5>
+<%= get_create_account_button %>
 
 <% end %>
 
-<p><%= link_to "Create an account", new_user_account_path(current_user) %></p>
+<p><%#= link_to "Create an account", new_user_account_path(current_user) %></p>

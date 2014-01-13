@@ -3,18 +3,28 @@
   <h3 class="right"><%= @account.account_name %> (<%= format_account_number(@account.account_number) %>)</h3>
 </div>
 
-<%= render 'month_period_form' %>
+  <% if @transactions.empty? %>
 
-<div id="transactions">
-  <%= render 'all_transactions' %>
-</div>
+    <h5>It looks like you don't have any transactions for this account. Let's add one.</h5>
+    <%= get_create_transaction_button %>
 
-<%#= paginate @transactions, params: { controller: "accounts", action: 'show', id: @account.id, period: { date: "2012-12-01"} } %>
+  <% else %>
 
-<h4>Account</h4>
-<p><%= link_to "Create an account", new_user_account_path(current_user) %></p>
-<p><%= link_to "Edit this account", edit_account_path(@account) %></p>
-<p><%= link_to 'Delete this account', account_path(@account), method: :delete, data: { confirm: 'Are you sure?' } %></p>
+    <%= render 'month_period_form' %>
 
-<h4>Transactions</h4>
-<p><%= link_to "Add a transaction", new_account_transaction_path(@account) %></p>
+    <div id="transactions">
+      <%= render 'all_transactions' %>
+    </div>
+
+    <%#= paginate @transactions, params: { controller: "accounts", action: 'show', id: @account.id, period: { date: "2012-12-01"} } %>
+
+  <% end %>
+    <div class="">
+    <h4>Account</h4>
+    <p><%= link_to "Create an account", new_user_account_path(current_user) %></p>
+    <p><%= link_to "Edit this account", edit_account_path(@account) %></p>
+    <p><%= link_to 'Delete this account', account_path(@account), method: :delete, data: { confirm: 'Are you sure?' } %></p>
+
+    <h4>Transactions</h4>
+    <p><%= link_to "Add a transaction", new_account_transaction_path(@account) %></p>
+    </div>

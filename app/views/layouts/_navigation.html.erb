@@ -1,7 +1,7 @@
 <nav class="top-bar" data-topbar>
   <ul class="title-area">
     <li class="name">
-      <h1><%= link_to "(Logo) Moneyable", root_path %></h1>
+      <h1><%= image_tag("moneyable-logo.png", alt: "Moneyable") %><%#= link_to "(Logo) Moneyable", root_path %></h1>
     </li>
     <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
   </ul>
@@ -9,8 +9,8 @@
   <section class="top-bar-section">
     <ul class="right">
       <%  if user_signed_in? %>
-        <li class="divider"></li>
-        <li class=""><%= link_to "Overview", overview_page_path %></li>
+        <!-- <li class="divider"></li>
+        <li class=""><%#= link_to "Overview", overview_page_path %></li> -->
         <li class="divider"></li>
         <li class="<% if has_accounts? %>has-dropdown<% end %>"><%= link_to "My Accounts", user_accounts_path(current_user) %>
           <% if has_accounts? %>
