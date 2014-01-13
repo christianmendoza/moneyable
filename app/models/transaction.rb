@@ -4,6 +4,15 @@ class Transaction < ActiveRecord::Base
   belongs_to :category
   before_save :format_debit_amount, if: :debit?
 
+  # date_of, transaction_type, description, amount, account_id, category_id is required
+  # transaction_type must be 1 or 2
+  # account_type must be 1..5
+  # amount must be greater than 0 and have two decimal places at most
+
+  validates :date_of, :transaction_type, :description, :amount, :account_id, :category_id, presence: true
+  validates :transaction_type, numericality: { only_integer: true, greater_than_or_equal_to: 1, less_than_or_equal_to: 2 }
+  validates :account_id, :category_id, numericality: { only_integer: true, greater_than_or_equal_to: 1 }
+
   scope :this_month,
     lambda {
       where("date_of >= ? AND date_of <= ?", 
