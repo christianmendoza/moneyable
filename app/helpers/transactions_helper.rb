@@ -48,4 +48,27 @@ module TransactionsHelper
     transactions = get_all_transactions_after(transaction)
     update_transaction_balances(transactions)
   end
+
+  def get_add_transaction_button(account)
+    link_to tag('i', class: 'fi-page-add'), new_account_transaction_path(account), title: "Add transaction"
+  end
+
+  def get_edit_transaction_button(transaction)
+    link_to tag('i', class: 'fi-page-edit'), edit_transaction_path(transaction), title: "Edit transaction"
+  end
+
+  def get_delete_transaction_button(transaction)
+    link_to tag('i', class: 'fi-page-delete'), transaction_path(transaction), method: :delete, data: { confirm: 'Are you sure?' }, title: "Delete transaction"
+  end
+
+  def get_transaction_type_icon(id)
+    case id
+    when 1
+      tag('i', class: 'fi-minus')
+    when 2
+      tag('i', class: 'fi-plus')
+    else
+      ""
+    end
+  end
 end
