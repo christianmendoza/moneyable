@@ -58,7 +58,7 @@ class Transaction < ActiveRecord::Base
       reorder(amount: :desc).
       includes(:category).
       group("categories.category_name").
-      sum("amount")
+      sum(:amount)
     end
   end
 
