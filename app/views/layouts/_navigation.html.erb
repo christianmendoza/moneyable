@@ -1,7 +1,7 @@
 <nav class="top-bar" data-topbar>
   <ul class="title-area">
     <li class="name">
-      <h1><%= image_tag("moneyable-logo.png", alt: "Moneyable") %><%#= link_to "(Logo) Moneyable", root_path %></h1>
+      <h1><%= link_to image_tag("moneyable-logo.png", alt: "Moneyable"), root_path, class: "logo" %><%#= link_to "(Logo) Moneyable", root_path %></h1>
     </li>
     <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
   </ul>
@@ -24,16 +24,16 @@
         </li>
         <li class="divider"></li>
         <li class=""><%= link_to "Reports", reports_page_path %></li>
-        <li class="divider"></li>
-        <li class="<%= is_active?(contact_page_path) %>"><%= link_to "Contact", contact_page_path %>
-        </li>
+        <!-- <li class="divider"></li>
+        <li class="<%#= is_active?(contact_page_path) %>"><%#= link_to "Contact", contact_page_path %>
+        </li> -->
         <li class="divider"></li>
         <li class=""><%= link_to "Sign out", destroy_user_session_path, method: :delete %></li>
       <% else %>
         <li class="divider"></li>
-        <li class="<%= is_active?(features_page_path) %>"><%= link_to "Features", features_page_path %></li>
-        <li class="divider"></li>
-        <li class="<%= is_active?(contact_page_path) %>"><%= link_to "Contact", contact_page_path %></li>
+        <li class="<%= is_active?(about_page_path) %>"><%= link_to "About", about_page_path %></li>
+        <!-- <li class="divider"></li>
+        <li class="<%#= is_active?(contact_page_path) %>"><%#= link_to "Contact", contact_page_path %></li> -->
         <li class="divider"></li>
         <li class="<%= is_active?(new_user_session_path) %>"><%= link_to "Log in", new_user_session_path %></li>
         <li class="divider"></li>
