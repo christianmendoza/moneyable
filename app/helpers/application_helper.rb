@@ -100,7 +100,7 @@ module ApplicationHelper
   end
 
   def get_all_accounts
-    current_user.accounts
+    current_user.accounts.order(account_name: :asc)
   end
 
   def get_current_month
