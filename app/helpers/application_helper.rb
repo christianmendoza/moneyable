@@ -82,10 +82,10 @@ module ApplicationHelper
 
   def get_transaction_status(cleared)
     if(cleared)
-      #tag('i', class: 'fi-check')
-      "Cleared"
+      tag('i', class: 'fi-check')
+      # "Cleared"
     else
-      "Not cleared"
+      # "Not cleared"
     end
   end
 
