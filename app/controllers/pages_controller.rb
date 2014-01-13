@@ -1,18 +1,17 @@
 class PagesController < ApplicationController
   before_action :find_accounts, only: [:reports]
-  before_filter :authenticate_user!, only: [:overview, :reports]
+  before_filter :authenticate_user!, only: [:overview, :reports, :moar, :associations]
 
   def homepage
     render
   end
 
-  def overview
-    render
-  end
+  # def overview
+  #   render
+  # end
 
   def reports
     @month = view_context.get_current_month
-    #@expenses = view_context.get_expenses(@month)
   end
 
   def features
@@ -20,6 +19,14 @@ class PagesController < ApplicationController
   end
 
   def contact
+    render
+  end
+
+  def moar
+    render
+  end
+
+  def associations
     render
   end
 
